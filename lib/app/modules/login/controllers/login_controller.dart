@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
-
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final count = 0.obs;

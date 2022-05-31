@@ -5,7 +5,7 @@ class Theme_ {
   static const TextStyle ts1 = TextStyle(
       color: Color(0xFF0063DA), fontSize: 40, fontWeight: FontWeight.bold);
 
-  static const raFontFamily = "Roboto";
+  static const aFontFamily = "Montserrat";
 
   //Colors
   static const MaterialColor aBlue = MaterialColor(
@@ -35,12 +35,12 @@ class Theme_ {
 
   //Text Styles
   static const ts0r =
-      TextStyle(fontSize: 50, fontFamily: raFontFamily, color: Colors.black);
+      TextStyle(fontSize: 50, fontFamily: aFontFamily, color: Colors.black);
   static final ts0rWhite = ts0r.copyWith(color: Colors.white);
   //font size 24
   static const ts1s = TextStyle(
       fontSize: 27,
-      fontFamily: raFontFamily,
+      fontFamily: aFontFamily,
       color: Colors.black,
       fontWeight: FontWeight.w600);
   static final ts1sBlue = ts1s.copyWith(color: darkBlue);
@@ -49,13 +49,13 @@ class Theme_ {
   //20
   static const ts2r = TextStyle(
       fontSize: 24,
-      fontFamily: raFontFamily,
+      fontFamily: aFontFamily,
       color: Colors.black,
       fontWeight: FontWeight.w500);
 //18
   static const ts3r = TextStyle(
       fontSize: 21,
-      fontFamily: raFontFamily,
+      fontFamily: aFontFamily,
       color: Colors.black,
       fontWeight: FontWeight.w500);
 //18
@@ -71,7 +71,7 @@ class Theme_ {
 
   static const ts4r = TextStyle(
       fontSize: 19,
-      fontFamily: raFontFamily,
+      fontFamily: aFontFamily,
       color: Colors.black,
       fontWeight: FontWeight.w500);
   static final ts4s = ts4r.copyWith(fontWeight: FontWeight.w600);
@@ -83,7 +83,7 @@ class Theme_ {
 
   static const ts5r = TextStyle(
       fontSize: 17,
-      fontFamily: raFontFamily,
+      fontFamily: aFontFamily,
       color: Colors.black,
       fontWeight: FontWeight.w500);
   static final ts5rBlue = ts5r.copyWith(color: aBlue);
@@ -97,7 +97,7 @@ class Theme_ {
 
   static const ts6r = TextStyle(
       fontSize: 15,
-      fontFamily: raFontFamily,
+      fontFamily: aFontFamily,
       color: Colors.black,
       fontWeight: FontWeight.w500);
   static final ts6l = ts6r.copyWith(fontWeight: FontWeight.w300);
@@ -109,7 +109,7 @@ class Theme_ {
 
   static const ts7r = TextStyle(
       fontSize: 13,
-      fontFamily: raFontFamily,
+      fontFamily: aFontFamily,
       color: Colors.black,
       fontWeight: FontWeight.w500);
   static final ts7l = ts7r.copyWith(fontWeight: FontWeight.w300);

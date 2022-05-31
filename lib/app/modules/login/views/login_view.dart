@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:assisto/app/theme/theme.dart';
 import 'package:assisto/app/widgets/textField.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme_.pageBg,
@@ -19,12 +21,13 @@ class LoginView extends GetView<LoginController> {
       body: Container(
         width: double.infinity,
         color: Theme_.pageBg,
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.only(top: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,12 +44,18 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
               width: double.infinity,
               child: Column(
                 children: [
                   AssistoTextField(
-                      hintText: "Username",
-                      controller: controller.nameController),
+                    hintText: "Username",
+                    controller: controller.nameController,
+                    prefixIcon: SizedBox(
+                        child: Center(child: FaIcon(FontAwesomeIcons.user)),
+                        height: 25,
+                        width: 25),
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -54,6 +63,7 @@ class LoginView extends GetView<LoginController> {
                     hintText: "Password",
                     controller: controller.passwordController,
                     obscureText: true,
+                    viewButton: true,
                   ),
                   SizedBox(
                     height: 5,
@@ -71,11 +81,18 @@ class LoginView extends GetView<LoginController> {
                   ),
                   Container(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      child: Text("Login"),
-                      onPressed: controller.onLoginPressed,
+                    child: GestureDetector(
+                      onTap: controller.onLoginPressed(),
+                      child: LoginButton(),
                     ),
-                  )
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: GestureDetector(
+                      onTap: controller.onLoginPressed(),
+                      child: SignInWithGoogle(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -87,6 +104,14 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             Container(
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(45),
+                  topRight: Radius.circular(45),
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -102,6 +127,43 @@ class LoginView extends GetView<LoginController> {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class SignInWithGoogle extends StatelessWidget {
+  const SignInWithGoogle({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return;
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  const LoginButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 51,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xFF3946B0).withOpacity(0.34),
+            blurRadius: 40,
+            offset: Offset(0, 16),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(19),
+        color: Theme_.aBlue,
+      ),
+      child: Center(
+        child: Text(
+          "Login",
+          style: Theme_.tS20white,
         ),
       ),
     );
