@@ -1,13 +1,13 @@
-import 'package:assisto/app/theme/theme.dart';
-import 'package:assisto/app/widgets/textField.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
+import '../../../theme/theme.dart';
+import '../../../widgets/textField.dart';
+import '../controllers/sign_up_controller.dart';
 
-class LoginView extends GetView<LoginController> {
+class SignUpView extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +31,11 @@ class LoginView extends GetView<LoginController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Login",
+                    "Sign Up",
                     style: Theme_.ts0r,
                   ),
                   Text(
-                    "Sign in to continue!",
+                    "Create account to get started.",
                     style: Theme_.ts2r.copyWith(color: Theme_.greyL),
                   ),
                 ],
@@ -46,9 +46,36 @@ class LoginView extends GetView<LoginController> {
               width: double.infinity,
               child: Column(
                 children: [
+                  Container(
+                    width: double.infinity,
+                    child: GestureDetector(
+                      onTap: controller.onSignInWithGoogle(),
+                      child: SignInWithGoogle(),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: Divider(
+                        thickness: 2,
+                        indent: 60,
+                        endIndent: 15,
+                      )),
+                      Text('or'),
+                      Expanded(
+                          child: Divider(
+                        thickness: 2,
+                        indent: 15,
+                        endIndent: 60,
+                      )),
+                    ],
+                  ),
+                  SizedBox(height: 15),
                   AssistoTextField(
-                    hintText: "Username",
-                    controller: controller.nameController,
+                    hintText: "Email or Phone",
+                    controller: controller.idController,
                     prefixIcon: SizedBox(
                         child: Center(child: FaIcon(FontAwesomeIcons.user)),
                         height: 25,
@@ -57,41 +84,15 @@ class LoginView extends GetView<LoginController> {
                   SizedBox(
                     height: 10,
                   ),
-                  AssistoTextField(
-                    hintText: "Password",
-                    controller: controller.passwordController,
-                    obscureText: true,
-                    viewButton: true,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {
-                          print("Forgot Password Pressed");
-                        },
-                        child: Text(
-                          "Forgot Password?",
-                          style: Theme_.ts5lGreyL,
-                        )),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: GestureDetector(
-                      onTap: controller.onLoginPressed(),
-                      child: LoginButton(),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: GestureDetector(
-                      onTap: controller.onLoginPressed(),
-                      child: SignInWithGoogle(),
-                    ),
-                  ),
                 ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              width: double.infinity,
+              child: GestureDetector(
+                onTap: controller.onSendOTP(),
+                child: SendOTPButton(),
               ),
             ),
             Center(
@@ -113,11 +114,11 @@ class LoginView extends GetView<LoginController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account? "),
+                  Text("Already have an account? "),
                   TextButton(
-                    onPressed: controller.onSignUpPressed,
+                    onPressed: controller.onLogInPressed,
                     child: Text(
-                      "Sign Up",
+                      "Log in",
                       style: TextStyle(color: Theme_.aBlue),
                     ),
                   ),
@@ -140,8 +141,8 @@ class SignInWithGoogle extends StatelessWidget {
   }
 }
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({Key? key}) : super(key: key);
+class SendOTPButton extends StatelessWidget {
+  const SendOTPButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +161,7 @@ class LoginButton extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "Login",
+          "Send OTP",
           style: Theme_.tS20white,
         ),
       ),

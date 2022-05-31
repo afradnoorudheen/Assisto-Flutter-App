@@ -1,3 +1,4 @@
+import 'package:assisto/app/modules/sign_up/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,5 +22,7 @@ class LoginController extends GetxController {
 
   onLoginPressed() {}
 
-  onSignUpPressed() {}
+  onSignUpPressed() {
+    Get.to(SignUpView());
+  }
 }
