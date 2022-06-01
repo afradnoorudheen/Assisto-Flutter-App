@@ -26,20 +26,24 @@ class _AssistoTextFieldState extends State<AssistoTextField> {
       controller: widget.controller,
       obscureText: widget.obscureText,
       decoration: InputDecoration(
-        prefixIconColor: Theme_.aBlue,
         prefixIcon: SizedBox(
-          child: Center(child: widget.prefixIcon ?? SizedBox()),
+          child: widget.prefixIcon,
           height: 25,
           width: 25,
         ),
         filled: true,
         hintText: widget.hintText,
+        hintStyle: Theme_.ts5rGreyL,
         fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(200),
-          borderSide: BorderSide(color: Theme_.aBlue, width: 10),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(19),
+          borderSide: BorderSide(color: Theme_.aBlue, width: 1.5),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(19),
+          borderSide: BorderSide(color: Colors.white, width: 0),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         suffixIcon: widget.viewButton
             ? IconButton(
                 icon: Icon(Icons.remove_red_eye),
@@ -51,10 +55,7 @@ class _AssistoTextFieldState extends State<AssistoTextField> {
               )
             : null,
       ),
-      style: TextStyle(
-        fontSize: 15,
-        color: Theme_.aBlue,
-      ),
+      style: Theme_.ts5rBlue,
     );
   }
 }

@@ -27,7 +27,8 @@ class Theme_ {
   static final darkBlue = Color(0xFF2C6EFF);
   static const greyEL = Color(0xFFC0C0C0);
   static const greyL = Color(0xFF979797);
-  static const greyD = Color(0xFF828282);
+  static const grey = Color(0xFFBFBFBF);
+  static const greyD = Color(0xFF8A8A8A);
   static const greyED = Color(0xFF494949);
   static const green = Color(0xFF50A948);
   static const int _bluePrimaryValue = 0xFF0063DA;
@@ -35,7 +36,7 @@ class Theme_ {
 
   //Text Styles
   static const ts0r =
-      TextStyle(fontSize: 50, fontFamily: aFontFamily, color: Colors.black);
+      TextStyle(fontSize: 44, fontFamily: aFontFamily, color: Colors.black);
   static final ts0rWhite = ts0r.copyWith(color: Colors.white);
   //font size 24
   static const ts1s = TextStyle(
@@ -88,9 +89,11 @@ class Theme_ {
       fontWeight: FontWeight.w500);
   static final ts5rBlue = ts5r.copyWith(color: aBlue);
   static final ts5rGreyL = ts5r.copyWith(color: greyL);
+  static final ts5rGreyEL = ts5r.copyWith(color: greyEL);
   static final ts5rGreyD = ts5r.copyWith(color: greyD);
   static final ts5lGreyL = ts5rGreyL.copyWith(fontWeight: FontWeight.w300);
   static final ts5s = ts5r.copyWith(fontWeight: FontWeight.w600);
+  static final ts5sGreyEL = ts5s.copyWith(color: greyEL);
   static final ts5sBlue = ts5s.copyWith(color: aBlue);
   static final ts5sGreyD = ts5s.copyWith(color: greyD);
   static final ts5lGreyD = ts5sGreyD.copyWith(fontWeight: FontWeight.w300);

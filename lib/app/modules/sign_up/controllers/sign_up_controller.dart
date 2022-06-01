@@ -6,6 +6,7 @@ class SignUpController extends GetxController {
   TextEditingController idController = TextEditingController();
 
   final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -27,4 +28,6 @@ class SignUpController extends GetxController {
   onLogInPressed() {
     Get.back();
   }
+
+  googleSignUp() {}
 }
