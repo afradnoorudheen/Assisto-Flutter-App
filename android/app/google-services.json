@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "51678365951",
+    "project_id": "assisto-d824a",
+    "storage_bucket": "assisto-d824a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51678365951:android:5f8c53174675e2cd3464ca",
+        "android_client_info": {
+          "package_name": "com.assisto.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51678365951-chftkjdp2oc4jpo2tb3506cvuc8ouo7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR3M9xEoPS3DUhaQ0tBDxs1QzNbRGzWK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51678365951-chftkjdp2oc4jpo2tb3506cvuc8ouo7n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "51678365951-bmntcuu861bcoekjavgur58ucg1611u5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.assisto.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

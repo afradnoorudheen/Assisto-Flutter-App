@@ -9,8 +9,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   file_picker: ^4.6.0
+  firebase_auth: ^3.3.19
+  firebase_core: ^1.17.1
   flutter:
     sdk: flutter
+  flutter_otp_text_field: ^1.0.1
   font_awesome_flutter: ^10.1.0
   get: 4.6.3
 

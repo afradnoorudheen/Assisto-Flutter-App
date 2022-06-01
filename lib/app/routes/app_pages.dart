@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/analyse_audio/bindings/analyse_audio_binding.dart';
 import '../modules/analyse_audio/views/analyse_audio_view.dart';
+import '../modules/auth/bindings/auth_binding.dart';
+import '../modules/auth/views/auth_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -16,7 +18,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.AUTH;
 
   static final routes = [
     GetPage(
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.ANALYSE_AUDIO,
       page: () => AnalyseAudioView(),
       binding: AnalyseAudioBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTH,
+      page: () => const AuthView(),
+      binding: AuthBinding(),
     ),
   ];
 }

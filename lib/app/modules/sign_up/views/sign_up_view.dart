@@ -1,5 +1,6 @@
 import 'package:assisto/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
@@ -112,8 +113,8 @@ class SignUpView extends GetView<LoginController> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 15),
                           child: AssistoTextField(
-                            hintText: "E-mail or Phone",
-                            controller: controller.idController,
+                            hintText: "Phone",
+                            controller: controller.phoneController,
                             prefixIcon: Center(child: AImg(name: 'user')),
                           ),
                         ),
@@ -125,7 +126,10 @@ class SignUpView extends GetView<LoginController> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: AButton(
                       label: 'Send OTP',
-                      onPressed: controller.onSendOTP,
+                      onPressed: () {
+                        Get.dialog(_buildOTPDialog());
+                        controller.onSendOTP();
+                      },
                     ),
                   ),
                   Spacer(),
@@ -144,122 +148,76 @@ class SignUpView extends GetView<LoginController> {
         ),
       ),
     );
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme_.pageBg,
-      ),
-      body: Container(
-        width: double.infinity,
-        color: Theme_.pageBg,
-        padding: EdgeInsets.only(top: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+  }
+
+  Widget _buildOTPDialog() {
+    return Dialog(
+      insetPadding: EdgeInsets.all(20),
+      child: IntrinsicHeight(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Sign Up",
-                    style: Theme_.ts0r,
-                  ),
-                  Text(
-                    "Create account to get started.",
-                    style: Theme_.ts2r.copyWith(color: Theme_.greyL),
+                    'Verify',
+                    style: Theme_.ts2r.copyWith(fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              width: double.infinity,
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    child: GestureDetector(
-                      onTap: controller.onSignInWithGoogle(),
-                      child: SignInWithGoogle(),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                          child: Divider(
-                        thickness: 2,
-                        indent: 60,
-                        endIndent: 15,
-                      )),
-                      Text('or'),
-                      Expanded(
-                          child: Divider(
-                        thickness: 2,
-                        indent: 15,
-                        endIndent: 60,
-                      )),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  AssistoTextField(
-                    hintText: "Email or Phone",
-                    controller: controller.idController,
-                    prefixIcon: SizedBox(
-                        child: Center(child: FaIcon(FontAwesomeIcons.user)),
-                        height: 25,
-                        width: 25),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
+              Text(
+                'Enter the 4 -digit code which is send to your mail',
+                style: Theme_.ts6sGreyL.copyWith(fontWeight: FontWeight.w500),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              width: double.infinity,
-              child: GestureDetector(
-                onTap: controller.onSendOTP(),
-                child: SendOTPButton(),
-              ),
-            ),
-            Center(
-              child: Image.asset(
-                'assets/images/assisto.png',
-                height: 80,
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-            Container(
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(45),
-                  topRight: Radius.circular(45),
+              Container(
+                height: 100,
+                width: 300,
+                child: FittedBox(
+                  child: OtpTextField(
+                    fieldWidth: 60, textStyle: Theme_.ts4s,
+                    numberOfFields: 6,
+                    borderRadius: BorderRadius.circular(30),
+                    borderColor: Color(0xFF512DA8),
+                    //set to true to show as box or false to show as dash
+                    showFieldAsBox: true,
+                    //runs when a code is typed in
+                    onCodeChanged: (String code) {
+                      //handle validation or checks here
+                    },
+                    onSubmit: (String verificationCode) {
+                      controller.otp = verificationCode;
+                      controller.verifyAndLogin();
+                    },
+                  ),
                 ),
               ),
-              child: Row(
+              AButton(
+                  label: 'Verify',
+                  onPressed: () {
+                    controller.verifyAndLogin();
+                  }),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have an account? "),
+                  Text(
+                    "Not received the mail?",
+                    style: Theme_.ts6r.copyWith(
+                        color: Theme_.greyD, fontWeight: FontWeight.w500),
+                  ),
                   TextButton(
                     onPressed: controller.onLogInPressed,
                     child: Text(
-                      "Log in",
-                      style: TextStyle(color: Theme_.aBlue),
+                      "Resend",
+                      style: Theme_.ts6r.copyWith(
+                          color: Theme_.aBlue, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

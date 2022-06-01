@@ -1,4 +1,4 @@
-package com.aioncw.assisto
+package com.assisto.app
 
 import io.flutter.embedding.android.FlutterActivity
 
