@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/analyse_audio/bindings/analyse_audio_binding.dart';
+import '../modules/analyse_audio/views/analyse_audio_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.ANALYSE_AUDIO,
+      page: () => AnalyseAudioView(),
+      binding: AnalyseAudioBinding(),
     ),
   ];
 }
