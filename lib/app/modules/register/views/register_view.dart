@@ -16,170 +16,155 @@ class RegisterView extends GetView<RegisterController> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme_.pageBg,
+        leading: IconButton(
+          icon: FaIcon(
+            FontAwesomeIcons.chevronLeft,
+            color: Theme_.aBlue,
+          ),
+          onPressed: () {},
+        ),
       ),
       body: Container(
         width: double.infinity,
         color: Theme_.pageBg,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Sign Up",
-                      style: Theme_.ts0r,
-                    ),
-                    Text(
-                      "Complete your registration!",
-                      style: Theme_.ts2r.copyWith(color: Theme_.greyL),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    AssistoTextField(
-                      hintText: "First Name",
-                      controller: controller.firstNameController,
-                      prefixIcon: SizedBox(
-                          child: Center(child: FaIcon(FontAwesomeIcons.user)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    AssistoTextField(
-                      hintText: "Last Name",
-                      controller: controller.firstNameController,
-                      prefixIcon: SizedBox(
-                          child: Center(child: FaIcon(FontAwesomeIcons.user)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    AssistoTextField(
-                      hintText: "DOB",
-                      controller: controller.firstNameController,
-                      prefixIcon: SizedBox(
+        child:
+            ListView(padding: EdgeInsets.symmetric(horizontal: 30), children: [
+          Text(
+            "Sign Up",
+            style: Theme_.ts0r.copyWith(fontWeight: FontWeight.w500),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Complete your registration!",
+            style: Theme_.ts2r.copyWith(color: Theme_.greyEL),
+          ),
+          SizedBox(height: 50),
+          Container(
+            // margin: EdgeInsets.symmetric(horizontal: 30),
+            width: double.infinity,
+            child: Column(
+              children: [
+                AssistoTextField(
+                  hintText: "First Name",
+                  controller: controller.firstNameController,
+                  prefixIcon: SizedBox(
+                      child: Center(
                           child:
-                              Center(child: FaIcon(FontAwesomeIcons.calendar)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    AssistoTextField(
-                      hintText: "Gender",
-                      controller: controller.firstNameController,
-                      prefixIcon: SizedBox(
-                          child: Center(
-                              child: FaIcon(FontAwesomeIcons.genderless)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    AssistoTextField(
-                      hintText: "Google ID",
-                      controller: controller.firstNameController,
-                      prefixIcon: SizedBox(
-                          child: Center(child: FaIcon(FontAwesomeIcons.google)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    AssistoTextField(
-                      hintText: "Facebook ID",
-                      controller: controller.firstNameController,
-                      prefixIcon: SizedBox(
-                          child:
-                              Center(child: FaIcon(FontAwesomeIcons.facebook)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    AssistoTextField(
-                      hintText: "Password",
-                      controller: controller.passwordController,
-                      obscureText: true,
-                      viewButton: true,
-                      prefixIcon: SizedBox(
-                          child: Center(child: FaIcon(FontAwesomeIcons.lock)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    AssistoTextField(
-                      hintText: "Confirm Password",
-                      controller: controller.confirmPasswordController,
-                      obscureText: true,
-                      viewButton: true,
-                      prefixIcon: SizedBox(
-                          child: Center(child: FaIcon(FontAwesomeIcons.lock)),
-                          height: 25,
-                          width: 25),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      child: GestureDetector(
-                        onTap: controller.onCompletePressed(),
-                        child: LoginButton(),
-                      ),
-                    ),
-                  ],
+                              ImageIcon(AssetImage("assets/images/user.png"))),
+                      height: 25,
+                      width: 25),
                 ),
-              ),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(45),
-                    topRight: Radius.circular(45),
+                textFieldSpacing(),
+                AssistoTextField(
+                  hintText: "Last Name",
+                  controller: controller.firstNameController,
+                  prefixIcon: SizedBox(
+                      child: Center(
+                          child:
+                              ImageIcon(AssetImage("assets/images/user.png"))),
+                      height: 25,
+                      width: 25),
+                ),
+                textFieldSpacing(),
+                AssistoTextField(
+                  hintText: "Mail ID",
+                  controller: controller.firstNameController,
+                  prefixIcon: SizedBox(
+                      child: Center(
+                          child: FaIcon(
+                        FontAwesomeIcons.envelope,
+                        color: Theme_.grey,
+                      )),
+                      height: 25,
+                      width: 25),
+                ),
+                textFieldSpacing(),
+                AssistoTextField(
+                  hintText: "DOB",
+                  controller: controller.firstNameController,
+                  prefixIcon: SizedBox(
+                      child: Center(
+                          child: ImageIcon(
+                        AssetImage("assets/images/calendar-alt.png"),
+                        color: Theme_.grey,
+                      )),
+                      height: 25,
+                      width: 25),
+                ),
+                textFieldSpacing(),
+                AssistoTextField(
+                  hintText: "Gender",
+                  controller: controller.firstNameController,
+                  prefixIcon: SizedBox(
+                      child: Center(
+                          child: FaIcon(
+                        FontAwesomeIcons.venusMars,
+                        color: Theme_.grey,
+                      )),
+                      height: 25,
+                      width: 25),
+                ),
+                textFieldSpacing(),
+                AssistoTextField(
+                  hintText: "Google ID",
+                  controller: controller.firstNameController,
+                  prefixIcon: SizedBox(
+                      child: Center(
+                          child: FaIcon(
+                        FontAwesomeIcons.google,
+                        color: Theme_.grey,
+                      )),
+                      height: 25,
+                      width: 25),
+                ),
+                textFieldSpacing(),
+                AssistoTextField(
+                  hintText: "Password",
+                  controller: controller.passwordController,
+                  obscureText: true,
+                  viewButton: true,
+                  prefixIcon: SizedBox(
+                      child: Center(
+                          child: ImageIcon(
+                        AssetImage("assets/images/lock.png"),
+                        color: Theme_.grey,
+                      )),
+                      height: 25,
+                      width: 25),
+                ),
+                textFieldSpacing(),
+                AssistoTextField(
+                  hintText: "Confirm Password",
+                  controller: controller.confirmPasswordController,
+                  obscureText: true,
+                  viewButton: true,
+                  prefixIcon: SizedBox(
+                      child: Center(
+                          child: ImageIcon(
+                        AssetImage("assets/images/lock.png"),
+                        color: Theme_.grey,
+                      )),
+                      height: 25,
+                      width: 25),
+                ),
+                textFieldSpacing(),
+                Container(
+                  width: double.infinity,
+                  child: GestureDetector(
+                    onTap: controller.onCompletePressed(),
+                    child: LoginButton(),
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't have an account? "),
-                    TextButton(
-                      onPressed: controller.onLogInPressed,
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(color: Theme_.aBlue),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+              ],
+            ),
           ),
-        ),
+        ]),
       ),
     );
+  }
+
+  SizedBox textFieldSpacing() {
+    return SizedBox(height: 15);
   }
 }
 
@@ -203,8 +188,9 @@ class LoginButton extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "Complete",
-          style: Theme_.tS20white,
+          "COMPLETE",
+          style: Theme_.ts3r
+              .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
         ),
       ),
     );
