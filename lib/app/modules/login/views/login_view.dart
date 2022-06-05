@@ -14,7 +14,8 @@ class LoginView extends GetView<LoginController> {
     return PgContainer(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         bottomNavigationBar: Container(
           height: 80,
           decoration: BoxDecoration(
@@ -23,6 +24,13 @@ class LoginView extends GetView<LoginController> {
               topLeft: Radius.circular(45),
               topRight: Radius.circular(45),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xFF667197).withOpacity(0.08),
+                blurRadius: 40,
+                offset: Offset(0,-6),
+              )
+            ]
           ),
           /* child:  Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +85,6 @@ class LoginView extends GetView<LoginController> {
                     margin: EdgeInsets.symmetric(horizontal: 25),
                     child: Column(
                       children: [
-                      
                         SizedBox(height: 15),
                         /*   SizedBox(
                           height: 10,

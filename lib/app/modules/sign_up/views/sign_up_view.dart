@@ -23,7 +23,8 @@ class SignUpView extends GetView<LoginController> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         bottomNavigationBar: Container(
           height: 80,
           decoration: BoxDecoration(

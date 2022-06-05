@@ -23,7 +23,8 @@ class Theme_ {
       900: Color(0xFF000D1A),
     },
   );
-  static final pageBg = Color(0xFFF8F8F8);
+  // static final pageBg = Color(0xFFF8F8F8);
+  static final pageBg = Color(0xFFFFFFFF);
   static final darkBlue = Color(0xFF2C6EFF);
   static const greyEL = Color(0xFFC0C0C0);
   static const greyL = Color(0xFF979797);
