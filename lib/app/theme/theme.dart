@@ -94,6 +94,7 @@ class Theme_ {
   static final ts5lGreyL = ts5rGreyL.copyWith(fontWeight: FontWeight.w300);
   static final ts5s = ts5r.copyWith(fontWeight: FontWeight.w600);
   static final ts5sGreyEL = ts5s.copyWith(color: greyEL);
+  static final ts5sGrey = ts5s.copyWith(color: greyL);
   static final ts5sBlue = ts5s.copyWith(color: aBlue);
   static final ts5sGreyD = ts5s.copyWith(color: greyD);
   static final ts5lGreyD = ts5sGreyD.copyWith(fontWeight: FontWeight.w300);

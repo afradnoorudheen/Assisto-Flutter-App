@@ -3,6 +3,7 @@ import 'package:assisto/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends GetxController {
   TextEditingController nameController = TextEditingController();
@@ -15,13 +16,30 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
-  onLoginPressed() {}
+  
 
   onSignUpPressed() {
     Get.toNamed(Routes.SIGN_UP);
   }
 
-  onSignInWithGoogle() {}
+  onSignInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    final user = await auth.signInWithCredential(credential);
+    Get.offAllNamed(Routes.ANALYSE_AUDIO);
+  }
 
   onLogInPressed() {
     Get.back();

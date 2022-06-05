@@ -86,7 +86,8 @@ class SignUpView extends GetView<LoginController> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
                       children: [
-                        SignInWithGoogle(),
+                        SignInWithGoogle(
+                            onPressed: controller.onSignInWithGoogle),
                         SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

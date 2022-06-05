@@ -22,7 +22,7 @@ class AuthController extends GetxController {
 
   void checkAuth() {
     if (auth.currentUser != null) {
-      Get.toNamed(Routes.ANALYSE_AUDIO);
+      Get.toNamed(Routes.HOME);
     } else {
       Get.toNamed(Routes.LOGIN);
     }

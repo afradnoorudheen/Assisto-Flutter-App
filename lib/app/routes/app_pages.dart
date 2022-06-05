@@ -10,6 +10,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/reports/bindings/reports_binding.dart';
+import '../modules/reports/views/reports_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 
@@ -22,10 +24,10 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-    ),
+        name: _Paths.HOME,
+        page: () => HomeView(),
+        binding: HomeBinding(),
+        bindings: [ReportsBinding()]),
     GetPage(
       name: _Paths.LOGIN,
       page: () => LoginView(),
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.AUTH,
       page: () => const AuthView(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.REPORTS,
+      page: () => const ReportsView(),
+      binding: ReportsBinding(),
     ),
   ];
 }

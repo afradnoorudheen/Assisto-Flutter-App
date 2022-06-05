@@ -9,6 +9,7 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const ANALYSE_AUDIO = _Paths.ANALYSE_AUDIO;
   static const AUTH = _Paths.AUTH;
+  static const REPORTS = _Paths.REPORTS;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const ANALYSE_AUDIO = '/analyse-audio';
   static const AUTH = '/auth';
+  static const REPORTS = '/reports';
 }

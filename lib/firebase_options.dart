@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '51678365951',
     projectId: 'assisto-d824a',
     storageBucket: 'assisto-d824a.appspot.com',
+    androidClientId: '51678365951-vkitcj71npa5b1nhh2kmel0dqoonl22b.apps.googleusercontent.com',
     iosClientId: '51678365951-bmntcuu861bcoekjavgur58ucg1611u5.apps.googleusercontent.com',
     iosBundleId: 'com.assisto.app',
   );

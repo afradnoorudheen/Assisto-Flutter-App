@@ -1,6 +1,7 @@
 import 'package:assisto/app/theme/theme.dart';
 import 'package:assisto/app/widgets/textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class LoginView extends GetView<LoginController> {
               topRight: Radius.circular(45),
             ),
           ),
-          child: Row(
+          /* child:  Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -40,7 +41,7 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
             ],
-          ),
+          ), */
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -76,12 +77,9 @@ class LoginView extends GetView<LoginController> {
                     margin: EdgeInsets.symmetric(horizontal: 25),
                     child: Column(
                       children: [
-                        AssistoTextField(
-                          hintText: "Username",
-                          controller: controller.nameController,
-                          prefixIcon: Center(child: AImg(name: 'user')),
-                        ),
-                        SizedBox(
+                      
+                        SizedBox(height: 15),
+                        /*   SizedBox(
                           height: 10,
                         ),
                         AssistoTextField(
@@ -90,11 +88,12 @@ class LoginView extends GetView<LoginController> {
                           obscureText: true,
                           //viewButton: true,
                           prefixIcon: Center(child: AImg(name: 'lock')),
-                        ),
+                        ), */
                         SizedBox(
                           height: 5,
                         ),
-                        Container(
+
+                        /*  Container(
                           alignment: Alignment.centerRight,
                           child: TextButton(
                               onPressed: () {
@@ -104,25 +103,52 @@ class LoginView extends GetView<LoginController> {
                                 "Forgot Password?",
                                 style: Theme_.ts5sGreyEL.copyWith(fontSize: 16),
                               )),
-                        ),
+                        ), */
                       ],
                     ),
                   ),
-                  Spacer(),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: AButton(
+                      label: 'Send OTP',
+                      onPressed: () {
+                        Get.dialog(_buildOTPDialog());
+                        controller.onSendOTP();
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: Divider(
+                        thickness: 2,
+                        indent: 60,
+                        endIndent: 15,
+                      )),
+                      Text(
+                        'or',
+                        style: Theme_.ts6sGreyL,
+                      ),
+                      Expanded(
+                          child: Divider(
+                        thickness: 2,
+                        indent: 15,
+                        endIndent: 60,
+                      )),
+                    ],
+                  ),
+                  SizedBox(height: 15),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Column(
                       children: [
-                        AButton(
-                          label: "Login",
-                          onPressed: controller.onLoginPressed,
-                        ),
                         SizedBox(
                           height: 10,
                         ),
-                        GestureDetector(
-                          onTap: controller.onLoginPressed(),
-                          child: SignInWithGoogle(),
+                        SignInWithGoogle(
+                          onPressed: controller.onSignInWithGoogle,
                         ),
                       ],
                     ),
@@ -144,37 +170,114 @@ class LoginView extends GetView<LoginController> {
       ),
     );
   }
+
+  Widget _buildOTPDialog() {
+    return Dialog(
+      insetPadding: EdgeInsets.all(20),
+      child: IntrinsicHeight(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Verify',
+                    style: Theme_.ts2r.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+              Text(
+                'Enter the 4 -digit code which is send to your mail',
+                style: Theme_.ts6sGreyL.copyWith(fontWeight: FontWeight.w500),
+              ),
+              Container(
+                height: 100,
+                width: 300,
+                child: FittedBox(
+                  child: OtpTextField(
+                    fieldWidth: 60, textStyle: Theme_.ts4s,
+                    numberOfFields: 6,
+                    borderRadius: BorderRadius.circular(30),
+                    borderColor: Color(0xFF512DA8),
+                    //set to true to show as box or false to show as dash
+                    showFieldAsBox: true,
+                    //runs when a code is typed in
+                    onCodeChanged: (String code) {
+                      //handle validation or checks here
+                    },
+                    onSubmit: (String verificationCode) {
+                      controller.otp = verificationCode;
+                      controller.verifyAndLogin();
+                    },
+                  ),
+                ),
+              ),
+              AButton(
+                  label: 'Verify',
+                  onPressed: () {
+                    controller.verifyAndLogin();
+                  }),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Not received the mail?",
+                    style: Theme_.ts6r.copyWith(
+                        color: Theme_.greyD, fontWeight: FontWeight.w500),
+                  ),
+                  TextButton(
+                    onPressed: controller.onLogInPressed,
+                    child: Text(
+                      "Resend",
+                      style: Theme_.ts6r.copyWith(
+                          color: Theme_.aBlue, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class SignInWithGoogle extends StatelessWidget {
-  const SignInWithGoogle({Key? key}) : super(key: key);
+  final VoidCallback onPressed;
+  const SignInWithGoogle({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 51,
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Color(0xFF667197).withOpacity(0.08),
-          blurRadius: 40,
-          offset: Offset(0, 16),
-        ),
-      ], borderRadius: BorderRadius.circular(19), color: Colors.white),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-              child: Image.asset(
-            'assets/images/google.png',
-            height: 25,
-            width: 25,
-          )),
-          SizedBox(
-            width: 10,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        height: 51,
+        margin: EdgeInsets.symmetric(horizontal: 15),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Color(0xFF667197).withOpacity(0.08),
+            blurRadius: 40,
+            offset: Offset(0, 16),
           ),
-          Text("Connect with Google", style: Theme_.ts5rGreyEL),
-        ],
+        ], borderRadius: BorderRadius.circular(19), color: Colors.white),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+                child: Image.asset(
+              'assets/images/google.png',
+              height: 25,
+              width: 25,
+            )),
+            SizedBox(
+              width: 10,
+            ),
+            Text("Connect with Google", style: Theme_.ts5rGreyEL),
+          ],
+        ),
       ),
     );
   }
@@ -218,14 +321,16 @@ class AButton extends StatelessWidget {
 class AImg extends StatelessWidget {
   final String name;
   final double height, width;
-  final Color? color;
-  const AImg(
+  late final Color? color;
+  AImg(
       {Key? key,
       required this.name,
-      this.color = Theme_.grey,
       this.height = 20,
-      this.width = 20})
-      : super(key: key);
+      this.width = 20,
+      Color? color})
+      : super(key: key) {
+    this.color = color;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -254,6 +359,28 @@ class PgContainer extends StatelessWidget {
         end: Alignment.bottomRight,
         colors: [Colors.white, Color(0xFFEBEBEB)],
       )),
+      child: child,
+    );
+  }
+}
+
+class WhiteButton extends StatelessWidget {
+  final Widget child;
+  const WhiteButton({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(32)),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xFF667197).withOpacity(0.08),
+              blurRadius: 40,
+              offset: Offset(0, 16),
+            ),
+          ]),
       child: child,
     );
   }
