@@ -6,6 +6,7 @@ class Theme_ {
       color: Color(0xFF0063DA), fontSize: 40, fontWeight: FontWeight.bold);
 
   static const aFontFamily = "Montserrat";
+  static const aFontFamilyAlt = "Gilroy";
 
   //Colors
   static const MaterialColor aBlue = MaterialColor(
@@ -29,6 +30,7 @@ class Theme_ {
   static const greyEL = Color(0xFFC0C0C0);
   static const greyL = Color(0xFF979797);
   static const grey = Color(0xFFBFBFBF);
+  static const greyNav = Color(0xFFC4C4C4);
   static const greyD = Color(0xFF8A8A8A);
   static const greyED = Color(0xFF494949);
   static const green = Color(0xFF50A948);

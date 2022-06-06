@@ -8,6 +8,8 @@ class AuthView extends GetView<AuthController> {
   const AuthView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Image.asset("assets/images/splash.png",fit: BoxFit.cover),
+    );
   }
 }

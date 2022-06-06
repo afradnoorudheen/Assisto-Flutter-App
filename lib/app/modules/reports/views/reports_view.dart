@@ -24,28 +24,58 @@ class ReportsView extends GetView<ReportsController> {
                 width: 135,
               ),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Container(
+            //       height: 40,
+            //       width: 40,
+            //       child: Icon(
+            //         Icons.arrow_back,
+            //         color: Colors.white,
+            //       ),
+            //       decoration: BoxDecoration(
+            //           color: Color(0xFFCCD2DA),
+            //           borderRadius: BorderRadius.all(Radius.circular(12))),
+            //     ),
+            //     Spacer(),
+            //     Text(
+            //       'Reports',
+            //       style: Theme_.ts4s.copyWith(color: Theme_.aBlue),
+            //     ),
+            //     Spacer(),
+            //   ],
+            // ),
+            Stack(
+          alignment: AlignmentDirectional.centerStart,
+          children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 40,
-                  width: 40,
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xFFCCD2DA),
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                ),
-                Spacer(),
                 Text(
                   'Reports',
-                  style: Theme_.ts4s.copyWith(color: Theme_.aBlue),
+                  style: Theme_.ts4s.copyWith(
+                    color: Theme_.aBlue,
+                    fontFamily: Theme_.aFontFamilyAlt,
+                    fontSize: 24,
+                  ),
                 ),
-                Spacer(),
               ],
             ),
+            Container(
+              margin: EdgeInsets.only(left: 40),
+              height: 40,
+              width: 40,
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              decoration: BoxDecoration(
+                  color: Color(0xFFCCD2DA),
+                  borderRadius: BorderRadius.all(Radius.circular(12))),
+            ),
+          ],
+        ),
             Expanded(
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                     stream: FirebaseFirestore.instance
@@ -57,7 +87,7 @@ class ReportsView extends GetView<ReportsController> {
                         return ListView.separated(
                             separatorBuilder: ((context, index) => Divider()),
                             padding: EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 10),
+                                vertical: 20, horizontal: 30),
                             itemCount: docs.length,
                             itemBuilder: (c, i) {
                               return Row(
@@ -76,7 +106,7 @@ class ReportsView extends GetView<ReportsController> {
                                     style: Theme_.ts6s,
                                   ),
                                   Spacer(),
-                                  CircleAvatar()
+                                  buildEmotionUi(docs[i].data()['emotion']),
                                 ],
                               );
                             });
@@ -88,5 +118,33 @@ class ReportsView extends GetView<ReportsController> {
                     }))
           ])),
     ));
+  }
+
+  Widget buildEmotionUi(String _emotion) {
+    late String emotion;
+    late Color color;
+    switch (_emotion) {
+      case 'calm':
+        emotion = 'Smiley_Calm';
+        color = Color(0xFFEFC120);
+        break;
+      case 'disgust':
+        emotion = "Smiley_Disgust";
+        color = Theme_.red;
+        break;
+      case 'happy':
+        emotion = "Smiley_Happy";
+        color = Color(0xFF7CBC2B);
+        break;
+      case 'fearful':
+        emotion = "Smiley_Fearful";
+        color = Color(0xFFEA8C00);
+        break;
+    }
+    return AImg(
+      name: emotion,
+      height: 50,
+      width: 50,
+    );
   }
 }

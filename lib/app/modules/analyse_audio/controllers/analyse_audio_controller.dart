@@ -16,6 +16,7 @@ class AnalyseAudioController extends GetxController {
   void onInit() {
     super.onInit();
     // pickAudio();
+    // state = States.success;
   }
 
   @override

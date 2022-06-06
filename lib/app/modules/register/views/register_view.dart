@@ -57,7 +57,7 @@ class RegisterView extends GetView<RegisterController> {
                 textFieldSpacing(),
                 AssistoTextField(
                   hintText: "Last Name",
-                  controller: controller.firstNameController,
+                  controller: controller.lastNameController,
                   prefixIcon: SizedBox(
                       child: Center(
                           child:
@@ -68,7 +68,7 @@ class RegisterView extends GetView<RegisterController> {
                 textFieldSpacing(),
                 AssistoTextField(
                   hintText: "Mail ID",
-                  controller: controller.firstNameController,
+                  controller: controller.mailIDController,
                   prefixIcon: SizedBox(
                       child: Center(
                           child: FaIcon(
@@ -81,7 +81,7 @@ class RegisterView extends GetView<RegisterController> {
                 textFieldSpacing(),
                 AssistoTextField(
                   hintText: "DOB",
-                  controller: controller.firstNameController,
+                  controller: controller.dobController,
                   prefixIcon: SizedBox(
                       child: Center(
                           child: ImageIcon(
@@ -94,7 +94,7 @@ class RegisterView extends GetView<RegisterController> {
                 textFieldSpacing(),
                 AssistoTextField(
                   hintText: "Gender",
-                  controller: controller.firstNameController,
+                  controller: controller.genderController,
                   prefixIcon: SizedBox(
                       child: Center(
                           child: FaIcon(
@@ -107,7 +107,7 @@ class RegisterView extends GetView<RegisterController> {
                 textFieldSpacing(),
                 AssistoTextField(
                   hintText: "Google ID",
-                  controller: controller.firstNameController,
+                  controller: controller.googleIDController,
                   prefixIcon: SizedBox(
                       child: Center(
                           child: FaIcon(
@@ -118,40 +118,10 @@ class RegisterView extends GetView<RegisterController> {
                       width: 25),
                 ),
                 textFieldSpacing(),
-                AssistoTextField(
-                  hintText: "Password",
-                  controller: controller.passwordController,
-                  obscureText: true,
-                  viewButton: true,
-                  prefixIcon: SizedBox(
-                      child: Center(
-                          child: ImageIcon(
-                        AssetImage("assets/images/lock.png"),
-                        color: Theme_.grey,
-                      )),
-                      height: 25,
-                      width: 25),
-                ),
-                textFieldSpacing(),
-                AssistoTextField(
-                  hintText: "Confirm Password",
-                  controller: controller.confirmPasswordController,
-                  obscureText: true,
-                  viewButton: true,
-                  prefixIcon: SizedBox(
-                      child: Center(
-                          child: ImageIcon(
-                        AssetImage("assets/images/lock.png"),
-                        color: Theme_.grey,
-                      )),
-                      height: 25,
-                      width: 25),
-                ),
-                textFieldSpacing(),
                 Container(
                   width: double.infinity,
                   child: GestureDetector(
-                    onTap: controller.onCompletePressed(),
+                    onTap: controller.onCompletePressed,
                     child: LoginButton(),
                   ),
                 ),

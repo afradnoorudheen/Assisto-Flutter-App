@@ -19,19 +19,18 @@ class LoginView extends GetView<LoginController> {
         bottomNavigationBar: Container(
           height: 80,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(45),
-              topRight: Radius.circular(45),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0xFF667197).withOpacity(0.08),
-                blurRadius: 40,
-                offset: Offset(0,-6),
-              )
-            ]
-          ),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(45),
+                topRight: Radius.circular(45),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xFF667197).withOpacity(0.08),
+                  blurRadius: 40,
+                  offset: Offset(0, -6),
+                )
+              ]),
           /* child:  Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -86,18 +85,17 @@ class LoginView extends GetView<LoginController> {
                     child: Column(
                       children: [
                         SizedBox(height: 15),
-                        /*   SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         AssistoTextField(
-                          hintText: "Password",
-                          controller: controller.passwordController,
-                          obscureText: true,
+                          hintText: "Phone",
+                          controller: controller.phoneController,
                           //viewButton: true,
-                          prefixIcon: Center(child: AImg(name: 'lock')),
-                        ), */
+                          prefixIcon: Center(child: AImg(name: 'user')),
+                        ),
                         SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
 
                         /*  Container(

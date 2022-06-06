@@ -13,6 +13,7 @@ class AnalyseAudioView extends GetView<AnalyseAudioController> {
   Widget build(BuildContext context) {
     return GetBuilder<AnalyseAudioController>(builder: (_) {
       return Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
             height: Get.height,
@@ -92,11 +93,12 @@ class AnalyseAudioView extends GetView<AnalyseAudioController> {
 
   Widget buildTextField() {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: Color(0xFF000000).withOpacity(0.10),
-          blurRadius: 20,
-          offset: Offset(0, 3),
+          blurRadius: 59,
+          offset: Offset(0, 4),
         ),
       ]),
       child: TextField(
@@ -107,7 +109,7 @@ class AnalyseAudioView extends GetView<AnalyseAudioController> {
           prefixText: '+91',
           prefixStyle: Theme_.ts4r,
           suffixIcon: MaterialButton(
-              minWidth: 20,
+              minWidth: 70,
               height: 20,
               color: Theme_.aBlue,
               shape: CircleBorder(),
@@ -116,7 +118,7 @@ class AnalyseAudioView extends GetView<AnalyseAudioController> {
                     controller.phoneController.text);
               },
               child: Icon(
-                Icons.phone,
+                controller.state == States.success ? Icons.done : Icons.phone,
                 color: Colors.white,
               )),
           hintText: 'Phone Number',
@@ -139,12 +141,26 @@ class AnalyseAudioView extends GetView<AnalyseAudioController> {
 
   Widget _buildReactionUi() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Stack(
+          alignment: AlignmentDirectional.centerStart,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Call Summary',
+                  style: Theme_.ts4s.copyWith(
+                    color: Theme_.aBlue,
+                    fontFamily: Theme_.aFontFamilyAlt,
+                    fontSize: 24,
+                  ),
+                ),
+              ],
+            ),
             Container(
+              margin: EdgeInsets.only(left: 40),
               height: 40,
               width: 40,
               child: Icon(
@@ -155,22 +171,24 @@ class AnalyseAudioView extends GetView<AnalyseAudioController> {
                   color: Color(0xFFCCD2DA),
                   borderRadius: BorderRadius.all(Radius.circular(12))),
             ),
-            Spacer(),
-            Text(
-              'Call Summary',
-              style: Theme_.ts4s.copyWith(color: Theme_.aBlue),
-            ),
-            Spacer(),
           ],
         ),
         buildTextField(),
-        Text(
-          'Call : 2 Min 30 Sec',
-          style: Theme_.ts5sGreyD,
-        ),
-        Text(
-          '#CUS-125',
-          style: Theme_.ts5sGrey,
+        Column(
+          children: [
+            Text(
+              'Call : 2 Min 30 Sec',
+              style: Theme_.ts5sGreyD
+                  .copyWith(fontFamily: Theme_.aFontFamilyAlt, fontSize: 22),
+            ),
+            SizedBox(height: 10),
+            Text(
+              '#CUS- 125',
+              style: Theme_.ts5sGrey.copyWith(
+                fontFamily: Theme_.aFontFamilyAlt,
+              ),
+            ),
+          ],
         ),
         buildEmotionUi(),
         Row(
@@ -225,36 +243,45 @@ class AnalyseAudioView extends GetView<AnalyseAudioController> {
             )
           ],
         ),
-        Text(
-          'This Call Summary will be recorded for Future Analysis.',
-          style: Theme_.ts5rGreyD,
-          textAlign: TextAlign.center,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Text(
+            'This Call Summary will be recorded for Future Analysis.',
+            style: Theme_.ts5rGreyD,
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );
   }
 
   Widget buildEmotionUi() {
-    Color color = Color(0xFFE84646);
+    late String emotion;
+    late Color color;
+    switch (controller.emotion) {
+      case 'calm':
+        emotion = 'Smiley_Calm';
+        color = Color(0xFFEFC120);
+        break;
+      case 'disgust':
+        emotion = "Smiley_Disgust";
+        color = Theme_.red;
+        break;
+      case 'happy':
+        emotion = "Smiley_Happy";
+        color = Color(0xFF7CBC2B);
+        break;
+      case 'fearful':
+        emotion = "Smiley_Fearful";
+        color = Color(0xFFEA8C00);
+        break;
+    }
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0xFF667197).withOpacity(0.08),
-                  blurRadius: 40,
-                  offset: Offset(0, 16),
-                ),
-              ]),
-          child: CircleAvatar(
-            backgroundColor: color,
-            radius: 75,
-            child: Icon(Icons.abc),
-          ),
+        AImg(
+          name: emotion,
+          height: 175,
+          width: 175,
         ),
         Text(
           '${controller.emotion}!',

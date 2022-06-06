@@ -1,6 +1,8 @@
 import 'package:assisto/app/modules/reports/views/reports_view.dart';
+import 'package:assisto/app/routes/app_pages.dart';
 import 'package:assisto/app/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -11,15 +13,15 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   static const iconSize = 10.0;
   static const activeColor = Theme_.aBlue;
-  static const inactiveColor = Colors.grey;
+  static const inactiveColor = Theme_.greyNav;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PersistentTabView(
         context,
-        navBarHeight: 70,
+        navBarHeight: 80,
         margin: EdgeInsets.only(bottom: 5),
-        padding: NavBarPadding.only(top: 5, bottom: 5),
+        padding: NavBarPadding.only(top: 5, bottom: 15),
         decoration: NavBarDecoration(boxShadow: [
           BoxShadow(
               color: Color(0xFF4F5565).withOpacity(0.1),
@@ -85,7 +87,7 @@ class HomeView extends GetView<HomeController> {
   Scaffold buildHome() {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -94,8 +96,8 @@ class HomeView extends GetView<HomeController> {
                 alignment: Alignment.center,
                 child: AImg(
                   name: 'assisto_mini',
-                  height: 50,
-                  width: 135,
+                  height: 70,
+                  width: 155,
                 ),
               ),
               Row(
@@ -106,61 +108,104 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         Text(
                           'Hey!',
-                          style:
-                              Theme_.ts2r.copyWith(fontWeight: FontWeight.w400),
+                          style: Theme_.ts1s.copyWith(
+                              fontFamily: Theme_.aFontFamilyAlt,
+                              fontWeight: FontWeight.w200,
+                              fontSize: 35),
                         ),
                         Text(
-                          'Joy Mathey',
-                          style:
-                              Theme_.ts2r.copyWith(fontWeight: FontWeight.w600),
+                          controller.name,
+                          style: Theme_.ts2r.copyWith(
+                              fontFamily: controller.homeViewFont,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 35),
                         ),
-                        Text('Emp ID-82789', style: Theme_.ts6sGreyL)
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text('Emp ID- ',
+                                style: Theme_.ts6sGreyL.copyWith(
+                                  fontFamily: controller.homeViewFont,
+                                  color: Theme_.greyL,
+                                  fontSize: 20,
+                                )),
+                            Text(controller.empId.toString(),
+                                style: Theme_.ts6sGreyL.copyWith(
+                                  fontFamily: controller.homeViewFont,
+                                  color: Theme_.greyED,
+                                  fontSize: 20,
+                                )),
+                          ],
+                        )
                       ],
                     ),
                   ),
                   Image.asset(
                     'assets/images/propic.png',
-                    height: 100,
-                    width: 100,
+                    height: 120,
+                    width: 120,
                   )
                 ],
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                color: Theme_.aBlue,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.phone),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Call a Random Customer',
-                            style: Theme_.ts6s.copyWith(color: Colors.white),
-                          ),
-                          Text(
-                            '172 not contacted in database',
-                            style: Theme_.ts6r.copyWith(
+              GestureDetector(
+                onTap: () => Get.toNamed(Routes.ANALYSE_AUDIO),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  color: Theme_.aBlue,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 24,
+                          backgroundColor: Colors.white,
+                          child: Icon(Icons.phone),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Call a Random Customer.',
+                              style: Theme_.ts6s.copyWith(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w300),
-                          )
-                        ],
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                      )
-                    ],
+                                fontFamily: controller.homeViewFont,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  controller.contactCount.toString(),
+                                  style: TextStyle(
+                                    fontFamily: controller.homeViewFont,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                Text(
+                                  ' not contacted in database',
+                                  style: Theme_.ts6r.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w200,
+                                    fontFamily: controller.homeViewFont,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -171,29 +216,34 @@ class HomeView extends GetView<HomeController> {
                     Expanded(
                       child: Card(
                         elevation: 8,
-                        shadowColor: Colors.black26,
+                        shadowColor: Colors.black.withOpacity(0.1),
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         child: Padding(
-                          padding: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 22, vertical: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               AImg(
                                 name: 'trophy',
-                                height: 50,
-                                width: 50,
+                                height: 60,
+                                width: 60,
                               ),
+                              SizedBox(height: 10),
                               Text(
                                 'Target',
-                                style: Theme_.ts1s,
+                                style: Theme_.ts1s.copyWith(
+                                  fontFamily: controller.homeViewFont,
+                                ),
                               ),
+                              SizedBox(height: 2),
                               Text(
-                                '72/95 Completed',
-                                style: Theme_.ts6sGreyL
-                                    .copyWith(fontWeight: FontWeight.bold),
+                                '72 / 95 Completed',
+                                style: Theme_.ts6sGreyL.copyWith(
+                                    fontFamily: controller.homeViewFont),
                               )
                             ],
                           ),
@@ -203,28 +253,48 @@ class HomeView extends GetView<HomeController> {
                     Expanded(
                         child: Card(
                       elevation: 8,
-                      shadowColor: Colors.black26,
+                      shadowColor: Colors.black.withOpacity(0.1),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: Padding(
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 22, vertical: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AImg(
-                              name: 'trophy',
-                              height: 50,
-                              width: 50,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AImg(
+                                  name: 'Smiley_Happy',
+                                  height: 65,
+                                  width: 65,
+                                ),
+                                Text(
+                                  "Good!",
+                                  style: Theme_.ts2r.copyWith(
+                                    fontFamily: controller.homeViewFont,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 25,
+                                    color: Theme_.green,
+                                  ),
+                                )
+                              ],
                             ),
+                            SizedBox(height: 10),
                             Text(
                               'Reactions',
-                              style: Theme_.ts1s,
+                              style: Theme_.ts1s.copyWith(
+                                fontFamily: controller.homeViewFont,
+                              ),
                             ),
+                            SizedBox(height: 2),
                             Text(
                               'OverAll Satisfaction',
-                              style: Theme_.ts6sGreyL
-                                  .copyWith(fontWeight: FontWeight.bold),
+                              style: Theme_.ts6sGreyL.copyWith(
+                                  fontFamily: controller.homeViewFont),
                             )
                           ],
                         ),
@@ -235,16 +305,16 @@ class HomeView extends GetView<HomeController> {
               ),
               Card(
                 elevation: 8,
-                shadowColor: Colors.black26,
+                shadowColor: Colors.black.withOpacity(0.1),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.fromLTRB(20, 30, 13, 30),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(left: 10),
                         child: AImg(
                           name: 'question',
                           height: 40,
@@ -259,19 +329,20 @@ class HomeView extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                              // crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   '24 ',
                                   style: Theme_.ts4s.copyWith(
-                                      fontSize: 28,
-                                      color: Theme_.aBlue,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 28,
+                                    color: Theme_.aBlue,
+                                    fontFamily: controller.homeViewFont,
+                                  ),
                                 ),
                                 Text(
                                   'Saved Questions',
-                                  style: Theme_.ts4s
-                                      .copyWith(fontWeight: FontWeight.bold),
+                                  style: Theme_.ts4s.copyWith(
+                                      fontFamily: controller.homeViewFont),
                                 ),
                               ],
                             ),
@@ -279,29 +350,31 @@ class HomeView extends GetView<HomeController> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'Refer Questions when talking to customers',
+                                    'Refer Questions when talking to customers.',
                                     style: Theme_.ts6r.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.grey),
+                                      fontWeight: FontWeight.w200,
+                                      color: Colors.grey,
+                                      fontFamily: controller.homeViewFont,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
                             Container(
-                              height: 50,
-                              width: 175,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              height: 70,
+                              width: 150,
+                              padding: EdgeInsets.symmetric(horizontal: 20),
                               decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xFF3946B0).withOpacity(0.34),
-                                    blurRadius: 40,
-                                    offset: Offset(0, 16),
-                                  ),
-                                ],
+                                // boxShadow: [
+                                //   BoxShadow(
+                                //     color: Color(0xFF3946B0).withOpacity(0.34),
+                                //     blurRadius: 40,
+                                //     offset: Offset(0, 16),
+                                //   ),
+                                // ],
                                 borderRadius: BorderRadius.circular(19),
                                 color: Theme_.aBlue,
                               ),
@@ -309,9 +382,12 @@ class HomeView extends GetView<HomeController> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Add Question',
-                                      style: Theme_.ts5r
-                                          .copyWith(color: Colors.white),
+                                      'Add \nQuestions',
+                                      style: Theme_.ts5r.copyWith(
+                                        color: Colors.white,
+                                        fontFamily: controller.homeViewFont,
+                                        fontWeight: FontWeight.w800,
+                                      ),
                                     ),
                                   ),
                                   Icon(
@@ -324,10 +400,10 @@ class HomeView extends GetView<HomeController> {
                           ],
                         ),
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios,
+                      FaIcon(
+                        FontAwesomeIcons.chevronRight,
                         color: Colors.white,
-                      )
+                      ),
                     ],
                   ),
                 ),

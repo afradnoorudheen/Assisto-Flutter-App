@@ -78,3 +78,9 @@ flutter:
         - asset: fonts/Montserrat-ThinItalic.ttf
           style: italic
           weight: 100
+    - family: Gilroy
+      fonts:
+        - asset: fonts/Gilroy-ExtraBold.otf
+          weight: 800
+        - asset: fonts/Gilroy-Light.otf
+          weight: 200

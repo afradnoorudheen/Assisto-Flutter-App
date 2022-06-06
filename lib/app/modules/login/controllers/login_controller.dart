@@ -1,5 +1,7 @@
+import 'package:assisto/app/modules/auth/controllers/auth_controller.dart';
 import 'package:assisto/app/modules/sign_up/views/sign_up_view.dart';
 import 'package:assisto/app/routes/app_pages.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,8 +17,6 @@ class LoginController extends GetxController {
   void onInit() {
     super.onInit();
   }
-
-  
 
   onSignUpPressed() {
     Get.toNamed(Routes.SIGN_UP);
@@ -38,14 +38,25 @@ class LoginController extends GetxController {
 
     // Once signed in, return the UserCredential
     final user = await auth.signInWithCredential(credential);
-    Get.offAllNamed(Routes.ANALYSE_AUDIO);
+    await writeUserDetailsToFirebase(user.user!);
+    Get.find<AuthController>().checkAuth();
+    // Get.offAllNamed(Routes.AUTH);
+  }
+
+  writeUserDetailsToFirebase(User user) async {
+    await FirebaseFirestore.instance.collection('user').doc(user.uid).set(
+        User_(
+                id: user.uid,
+                firstName: user.displayName,
+                googleID: user.email,
+                mailID: user.email)
+            .toFirebase(),
+        SetOptions(merge: true));
   }
 
   onLogInPressed() {
     Get.back();
   }
-
-  googleSignUp() {}
 
   onSendOTP() async {
     await auth.verifyPhoneNumber(
@@ -62,11 +73,10 @@ class LoginController extends GetxController {
   }
 
   Future<void> _onLoginSuccess(PhoneAuthCredential credential) async {
-    await auth.signInWithCredential(credential);
-    Get.offAllNamed(Routes.ANALYSE_AUDIO);
+    final user = await auth.signInWithCredential(credential);
+    await writeUserDetailsToFirebase(user.user!);
+    Get.offAllNamed(Routes.AUTH);
   }
-
-  verifyOTP() {}
 
   verifyAndLogin() async {
     PhoneAuthCredential authCredential = PhoneAuthProvider.credential(
