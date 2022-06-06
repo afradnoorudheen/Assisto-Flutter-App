@@ -9,7 +9,16 @@ class AuthView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Image.asset("assets/images/splash.png",fit: BoxFit.cover),
+      backgroundColor: Colors.black12,
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        child: Image.asset(
+          "assets/images/splash.png",
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+        ),
+      ),
     );
   }
 }

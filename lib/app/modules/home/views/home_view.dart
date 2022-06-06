@@ -10,6 +10,8 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../login/views/login_view.dart';
 import '../controllers/home_controller.dart';
 
+final textScaleFactor = 0.75;
+
 class HomeView extends GetView<HomeController> {
   static const iconSize = 10.0;
   static const activeColor = Theme_.aBlue;
@@ -108,6 +110,7 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         Text(
                           'Hey!',
+                          textScaleFactor: textScaleFactor,
                           style: Theme_.ts1s.copyWith(
                               fontFamily: Theme_.aFontFamilyAlt,
                               fontWeight: FontWeight.w200,
@@ -115,6 +118,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                         Text(
                           controller.name,
+                          textScaleFactor: textScaleFactor,
                           style: Theme_.ts2r.copyWith(
                               fontFamily: controller.homeViewFont,
                               fontWeight: FontWeight.w800,
@@ -124,12 +128,14 @@ class HomeView extends GetView<HomeController> {
                         Row(
                           children: [
                             Text('Emp ID- ',
+                                textScaleFactor: textScaleFactor,
                                 style: Theme_.ts6sGreyL.copyWith(
                                   fontFamily: controller.homeViewFont,
                                   color: Theme_.greyL,
                                   fontSize: 20,
                                 )),
                             Text(controller.empId.toString(),
+                                textScaleFactor: textScaleFactor,
                                 style: Theme_.ts6sGreyL.copyWith(
                                   fontFamily: controller.homeViewFont,
                                   color: Theme_.greyED,
@@ -147,64 +153,72 @@ class HomeView extends GetView<HomeController> {
                   )
                 ],
               ),
-              GestureDetector(
-                onTap: () => Get.toNamed(Routes.ANALYSE_AUDIO),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18))),
-                  color: Theme_.aBlue,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 24,
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.phone),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Call a Random Customer.',
-                              style: Theme_.ts6s.copyWith(
-                                color: Colors.white,
-                                fontFamily: controller.homeViewFont,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Row(
+              SizedBox(
+                width: double.maxFinite,
+                height: 110,
+                child: GestureDetector(
+                  onTap: () => Get.toNamed(Routes.ANALYSE_AUDIO),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18))),
+                    color: Theme_.aBlue,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 30),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundColor: Colors.white,
+                            child: Icon(Icons.phone),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  controller.contactCount.toString(),
-                                  style: TextStyle(
-                                    fontFamily: controller.homeViewFont,
+                                  'Call a Random Customer.',
+                                  textScaleFactor: textScaleFactor,
+                                  style: Theme_.ts6s.copyWith(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w800,
+                                    fontFamily: controller.homeViewFont,
+                                    fontSize: 20,
                                   ),
                                 ),
-                                Text(
-                                  ' not contacted in database',
-                                  style: Theme_.ts6r.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w200,
-                                    fontFamily: controller.homeViewFont,
-                                  ),
-                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      textScaleFactor: textScaleFactor,
+                                      controller.contactCount.toString(),
+                                      style: TextStyle(
+                                        fontFamily: controller.homeViewFont,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    Text(
+                                      ' not contacted in database',
+                                      textScaleFactor: textScaleFactor,
+                                      style: Theme_.ts6r.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w200,
+                                        fontFamily: controller.homeViewFont,
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
-                            )
-                          ],
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )
-                      ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -235,6 +249,7 @@ class HomeView extends GetView<HomeController> {
                               SizedBox(height: 10),
                               Text(
                                 'Target',
+                                textScaleFactor: textScaleFactor,
                                 style: Theme_.ts1s.copyWith(
                                   fontFamily: controller.homeViewFont,
                                 ),
@@ -242,6 +257,7 @@ class HomeView extends GetView<HomeController> {
                               SizedBox(height: 2),
                               Text(
                                 '72 / 95 Completed',
+                                textScaleFactor: textScaleFactor,
                                 style: Theme_.ts6sGreyL.copyWith(
                                     fontFamily: controller.homeViewFont),
                               )
@@ -274,6 +290,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 Text(
                                   "Good!",
+                                  textScaleFactor: textScaleFactor,
                                   style: Theme_.ts2r.copyWith(
                                     fontFamily: controller.homeViewFont,
                                     fontWeight: FontWeight.w800,
@@ -286,6 +303,7 @@ class HomeView extends GetView<HomeController> {
                             SizedBox(height: 10),
                             Text(
                               'Reactions',
+                              textScaleFactor: textScaleFactor,
                               style: Theme_.ts1s.copyWith(
                                 fontFamily: controller.homeViewFont,
                               ),
@@ -293,6 +311,7 @@ class HomeView extends GetView<HomeController> {
                             SizedBox(height: 2),
                             Text(
                               'OverAll Satisfaction',
+                              textScaleFactor: textScaleFactor,
                               style: Theme_.ts6sGreyL.copyWith(
                                   fontFamily: controller.homeViewFont),
                             )
@@ -333,6 +352,7 @@ class HomeView extends GetView<HomeController> {
                               children: [
                                 Text(
                                   '24 ',
+                                  textScaleFactor: textScaleFactor,
                                   style: Theme_.ts4s.copyWith(
                                     fontSize: 28,
                                     color: Theme_.aBlue,
@@ -341,6 +361,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 Text(
                                   'Saved Questions',
+                                  textScaleFactor: textScaleFactor,
                                   style: Theme_.ts4s.copyWith(
                                       fontFamily: controller.homeViewFont),
                                 ),
@@ -351,6 +372,7 @@ class HomeView extends GetView<HomeController> {
                                 Expanded(
                                   child: Text(
                                     'Refer Questions when talking to customers.',
+                                    textScaleFactor: textScaleFactor,
                                     style: Theme_.ts6r.copyWith(
                                       fontWeight: FontWeight.w200,
                                       color: Colors.grey,
@@ -383,6 +405,7 @@ class HomeView extends GetView<HomeController> {
                                   Expanded(
                                     child: Text(
                                       'Add \nQuestions',
+                                      textScaleFactor: textScaleFactor,
                                       style: Theme_.ts5r.copyWith(
                                         color: Colors.white,
                                         fontFamily: controller.homeViewFont,

@@ -75,7 +75,8 @@ class LoginController extends GetxController {
   Future<void> _onLoginSuccess(PhoneAuthCredential credential) async {
     final user = await auth.signInWithCredential(credential);
     await writeUserDetailsToFirebase(user.user!);
-    Get.offAllNamed(Routes.AUTH);
+    //Get.offAllNamed(Routes.AUTH);
+    Get.find<AuthController>().checkAuth();
   }
 
   verifyAndLogin() async {
